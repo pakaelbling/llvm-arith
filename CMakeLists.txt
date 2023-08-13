@@ -16,7 +16,8 @@ add_definitions(${LLVM_DEFINITIONS_LIST})
 include_directories(./cmake-build-debug/_deps/peglib-src)
 add_executable(ArithComp main.cpp
         parser.h
-        compiler.h)
+        compiler.h
+        utils.h)
 llvm_map_components_to_libnames(llvm_libs support core irreader)
 
 # Link against LLVM libraries
