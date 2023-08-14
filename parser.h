@@ -20,8 +20,10 @@ namespace parser {
         %whitespace <- [ \t\r\n]*
         )";
     public:
-        peg::parser parser = peg::parser();
+        peg::parser parser;
         Parser();
+        // Parse a string into the supplied AST pointer
+        // Modifies ast in place
         void parseExpr(std::shared_ptr<peg::Ast> &ast, const char* expr) const;
     };
 } // namespace parser

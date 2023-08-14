@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     int c;
     char *fileName = nullptr;
     int printAst = 0, emitObj = 0, emitLL = 0;
-    while ((c = getopt (argc, argv, "afol:")) != -1) {
+    while ((c = getopt(argc, argv, "afol:")) != -1) {
         switch (c) {
             case 'a':
                 printAst = 1;
@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
         parser.parseExpr(ast, expr);
         free(expr);
     } else {
+        // Set expr to the first non-option argument, assumes an expression is supplied
         expr = argv[optind];
         parser.parseExpr(ast, expr);
     }
@@ -56,7 +57,7 @@ int main(int argc, char *argv[]) {
     if(printAst) {
         std::cout << "AST:" << std::endl << peg::ast_to_s(ast) << std::endl;
     }
-    llvm::APInt result = compiler.compile(ast, /*printIR*/true);
+    llvm::APInt result = compiler.compile(ast, /*printIR=*/true);
     llvm::outs() << "RESULT: " << result << "\n";
     int retVal = 0;
     if (emitObj) {
