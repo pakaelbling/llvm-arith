@@ -1,9 +1,9 @@
+#pragma once
 #include <iostream>
 #include <llvm/IR/LLVMContext.h>
 #include <llvm/IR/IRBuilder.h>
 #include "peglib.h"
 
-#pragma once
 namespace compiler {
     struct Compiler {
     private:
@@ -21,11 +21,7 @@ namespace compiler {
         llvm::Value *handleLiteral(std::shared_ptr<peg::Ast> &ast);
         llvm::Function *initMainFunc(std::shared_ptr<peg::Ast> &ast);
     public:
-        Compiler() {
-            context = std::make_unique<llvm::LLVMContext>();
-            module = std::make_unique<llvm::Module>("ModuleId", *context);
-            builder = std::make_unique<llvm::IRBuilder<>>(*context);
-        }
+        Compiler();
         int emitObjectCode();
         void emitLL();
         llvm::APInt compile(std::shared_ptr<peg::Ast> &ast, bool printIR);

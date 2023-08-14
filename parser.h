@@ -1,9 +1,7 @@
 #pragma once
-#include <peglib.h>
-#include <llvm/IR/IRBuilder.h>
-
+#include "peglib.h"
 namespace parser {
-    class Parser {
+    struct Parser {
     private:
         // Single atoms need to be a part of BINARYEXPR to use the precedence and associativity capabilities of peglib
         const char *grammar = R"(
@@ -20,18 +18,10 @@ namespace parser {
         UNOP        <- "++" / "--"
         LITERAL     <- < '-'? [0-9]+ >
         %whitespace <- [ \t\r\n]*
-    )";
+        )";
     public:
         peg::parser parser = peg::parser();
-         Parser(){
-            parser.load_grammar(grammar);
-            parser.enable_packrat_parsing();
-            parser.enable_ast();
-        };
-
-         void parseExpr(std::shared_ptr<peg::Ast> &ast, const char* expr) const {
-             parser.parse(expr, ast);
-         }
+        Parser();
+        void parseExpr(std::shared_ptr<peg::Ast> &ast, const char* expr) const;
     };
-
-} // parser
+} // namespace parser

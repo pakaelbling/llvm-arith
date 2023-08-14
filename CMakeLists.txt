@@ -15,10 +15,12 @@ add_definitions(${LLVM_DEFINITIONS_LIST})
 
 include_directories(./cmake-build-debug/_deps/peglib-src)
 add_executable(ArithComp main.cpp
-        parser.h
+        parser.cpp
         compiler.cpp
-        utils.h
-        compiler.h)
+        utils.cpp
+        compiler.h
+        parser.h
+        utils.h)
 llvm_map_components_to_libnames(llvm_libs analysis core executionengine instcombine object orcjit runtimedyld scalaropts support native MC mc mcjit)
 
 # Link against LLVM libraries

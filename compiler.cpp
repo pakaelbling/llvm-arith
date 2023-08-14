@@ -136,6 +136,12 @@ namespace compiler {
             return main;
         }
 
+        Compiler::Compiler()  {
+            context = std::make_unique<llvm::LLVMContext>();
+            module = std::make_unique<llvm::Module>("ModuleId", *context);
+            builder = std::make_unique<llvm::IRBuilder<>>(*context);
+        }
+
         int Compiler::emitObjectCode(){
             return buildObjectCode();
         }
