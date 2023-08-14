@@ -5,19 +5,19 @@ namespace parser {
     private:
         // Single atoms need to be a part of BINARYEXPR to use the precedence and associativity capabilities of peglib
         const char *grammar = R"(
-        EXPRESSION  <- UNARYEXPR / BINARYEXPR
-        BINARYEXPR  <- ATOM (BINOP ATOM)* {
-                        precedence
-                            L - +
-                            L / *
-                            R ^
-                       }
-        UNARYEXPR   <- ATOM UNOP
-        ATOM        <- '(' EXPRESSION ')' / LITERAL
-        BINOP       <- < [-+/*^] >
-        UNOP        <- "++" / "--"
-        LITERAL     <- < '-'? [0-9]+ >
-        %whitespace <- [ \t\r\n]*
+            EXPRESSION  <- UNARYEXPR / BINARYEXPR
+            BINARYEXPR  <- ATOM (BINOP ATOM)* {
+                            precedence
+                                L - +
+                                L / *
+                                R ^
+                           }
+            UNARYEXPR   <- ATOM UNOP
+            ATOM        <- '(' EXPRESSION ')' / LITERAL
+            BINOP       <- < [-+/*^] >
+            UNOP        <- "++" / "--"
+            LITERAL     <- < '-'? [0-9]+ >
+            %whitespace <- [ \t\r\n]*
         )";
     public:
         peg::parser parser;

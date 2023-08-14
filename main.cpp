@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cstdio>
 #include <peglib.h>
 #include "parser.h"
 #include "compiler.h"
@@ -9,8 +9,8 @@ int main(int argc, char *argv[]) {
     // Handle arguments
     int c;
     char *fileName = nullptr;
-    int printAst = 0, emitObj = 0, emitLL = 0;
-    while ((c = getopt(argc, argv, "afol:")) != -1) {
+    int printAst = 0, printIR = 0, emitObj = 0, emitLL = 0;
+    while ((c = getopt(argc, argv, "afoil:")) != -1) {
         switch (c) {
             case 'a':
                 printAst = 1;
@@ -23,6 +23,9 @@ int main(int argc, char *argv[]) {
                 break;
             case 'l':
                 emitLL = 1;
+                break;
+            case 'i':
+                printIR = 1;
                 break;
             case '?':
                 if (optopt == 'f') {
@@ -57,7 +60,7 @@ int main(int argc, char *argv[]) {
     if(printAst) {
         std::cout << "AST:" << std::endl << peg::ast_to_s(ast) << std::endl;
     }
-    llvm::APInt result = compiler.compile(ast, /*printIR=*/true);
+    llvm::APInt result = compiler.compile(ast, /*printIR=*/printIR);
     llvm::outs() << "RESULT: " << result << "\n";
     int retVal = 0;
     if (emitObj) {
