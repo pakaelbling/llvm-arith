@@ -40,7 +40,7 @@ Here are some valid example expressions:
   - Evaluates to: 1 + (2 * 3) = 7
 - 2 ^ 3
   - Evaluates to: 8
-- 2 ^ 3 ^ 4
+- 2 ^ 3 ^ 3
   - Evaluates to 2 ^ (3 ^ 3) = 134217728
 - 3 + (2++) ^ 2
   - Evaluates to 3 + (3 ^ 2) = 12
